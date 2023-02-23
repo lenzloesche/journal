@@ -1,3 +1,4 @@
+import "./Footer.css";
 export default function Footer({ children }) {
-  return <footer>{children}</footer>;
+  return <footer className="Footer">{children}</footer>;
 }

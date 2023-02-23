@@ -4,6 +4,7 @@
   left: 30px;
 }
 .input {
+  resize: none;
   margin: 4px;
   width: 90%;
   border: 2px solid var(--color-water-10);

@@ -1,0 +1,8 @@
+@import url("../../colors.css");
+
+.Footer {
+  background-color: var(--color-granite);
+  color: var(--color-foam);
+  padding: 10px;
+  margin: 10px;
+}

@@ -19,10 +19,10 @@ function App() {
       <Button>Create</Button>
       <Navigation>
         <NavigationItem title="All Entries" number="3" selected />
-        <NavigationItem title="Favourites" number="1" />
+        <NavigationItem title="Favorites" number="1" />
       </Navigation>
       <EntryContainer>
-        <Entry title="Lorem1" date="FEB 27, 2028">
+        <Entry title="Lorem1" date="FEB 27, 2028" bookmarked>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
           consectetur totam unde quas. Nisi nemo, facere cumque dolores optio
           temporibus magni placeat sed, libero nulla quae quam impedit excepturi
