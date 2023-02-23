@@ -1,10 +1,23 @@
+import "./Input.css";
 export default function Input({ children, title }) {
   return (
     <>
-      <label htmlFor={title}>
+      <label htmlFor={title} className="label">
         {title}
-        <input id={title}>{children}</input>
       </label>
+      <br />
+
+      {title === "Notes" ? (
+        <textarea id={title} className="input">
+          {children}
+        </textarea>
+      ) : (
+        <input id={title} className="input">
+          {children}
+        </input>
+      )}
+
+      <br />
     </>
   );
 }

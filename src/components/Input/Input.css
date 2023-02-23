@@ -1,0 +1,14 @@
+@import url("../../colors.css");
+.label {
+  position: absolute;
+  left: 30px;
+}
+.input {
+  margin: 4px;
+  width: 90%;
+  border: 2px solid var(--color-water-10);
+  border-radius: 5px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
