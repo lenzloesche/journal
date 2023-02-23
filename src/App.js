@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Entry from "./components/Entry";
+import Button from "./components/Button";
+import EntryContainer from "./components/EntryContainer";
+import Input from "./components/Input";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header>JOURNAL</Header>
+      <h1>New Entry</h1>
+      <Input title="Motto" />
+      <Input title="Notes" />
+      <Button>Create</Button>
+      <EntryContainer>
+        <Entry />
+        <Entry />
+        <Entry>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+          consectetur totam unde quas. Nisi nemo, facere cumque dolores optio
+          temporibus magni placeat sed, libero nulla quae quam impedit excepturi
+          voluptas.
+        </Entry>
+      </EntryContainer>
+      <Footer>Journal App -- 2028</Footer>
+    </>
   );
 }
 
