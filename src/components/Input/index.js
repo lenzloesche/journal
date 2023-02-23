@@ -2,9 +2,11 @@ import "./Input.css";
 export default function Input({ children, title }) {
   return (
     <>
-      <label htmlFor={title} className="label">
-        {title}
-      </label>
+      <div className="lable-container">
+        <label htmlFor={title} className="label">
+          {title}
+        </label>
+      </div>
       <br />
 
       {title === "Notes" ? (

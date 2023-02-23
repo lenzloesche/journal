@@ -1,7 +1,10 @@
 @import url("../../colors.css");
 .label {
-  position: absolute;
-  left: 30px;
+  padding-left: 20px;
+}
+
+.lable-container {
+  text-align: left;
 }
 .input {
   resize: none;
