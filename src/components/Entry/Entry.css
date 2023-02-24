@@ -22,3 +22,6 @@
   margin-top: 20px;
   font-weight: 600;
 }
+img:hover {
+  cursor: pointer;
+}
