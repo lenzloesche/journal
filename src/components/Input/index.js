@@ -1,5 +1,5 @@
 import "./Input.css";
-export default function Input({ children, title }) {
+export default function Input({ title, input }) {
   return (
     <>
       <div className="lable-container">
@@ -10,13 +10,17 @@ export default function Input({ children, title }) {
       <br />
 
       {title === "Notes" ? (
-        <textarea id={title} className="input">
-          {children}
-        </textarea>
+        <textarea
+          id={title}
+          className="input"
+          onChange={(event) => (input.notes = event.target.value)}
+        ></textarea>
       ) : (
-        <input id={title} className="input">
-          {children}
-        </input>
+        <input
+          id={title}
+          className="input"
+          onChange={(event) => (input.title = event.target.value)}
+        ></input>
       )}
 
       <br />

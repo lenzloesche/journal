@@ -38,6 +38,8 @@ function App() {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
     },
   ]);
+  const [input, setInput] = useState({ notes: "", title: "" });
+
   const numberOfFavorites = () => {
     let trueCounter = 0;
     for (let count = 0; count < entries.length; count++) {
@@ -68,13 +70,13 @@ function App() {
       setAllEntriesSelected(false);
     }
   }
-  function handleCreateClick(motto, notes) {
+  function handleCreateClick() {
     const newEntry = {
-      title: motto,
+      title: input.title,
       key: entries[entries.length - 1].key + 1,
       isFavorite: false,
       date: "New Date()",
-      innerText: notes,
+      innerText: input.notes,
     };
     setEntries([...entries, newEntry]);
   }
@@ -83,11 +85,9 @@ function App() {
     <main>
       <Header>JOURNAL</Header>
       <Title>New Entry</Title>
-      <Input title="Motto" />
-      <Input title="Notes" />
-      <Button onClick={() => handleCreateClick("new item", "text")}>
-        Create
-      </Button>
+      <Input title="Motto" input={input} />
+      <Input title="Notes" input={input} />
+      <Button onClick={() => handleCreateClick()}>Create</Button>
       <Navigation>
         <NavigationItem
           title="All Entries"
