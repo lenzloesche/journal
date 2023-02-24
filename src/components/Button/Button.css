@@ -1,0 +1,11 @@
+@import url("../../colors.css");
+.Button {
+  border-radius: 5px;
+  color: var(--color-foam);
+  border: 0;
+  background-color: var(--color-nemo);
+  width: 140px;
+  height: 60px;
+  margin: 20px;
+  font-size: 20px;
+}

@@ -1,0 +1,24 @@
+@import url("../../colors.css");
+
+.line {
+  height: 3px;
+  background-color: var(--color-water-10);
+}
+
+.motto {
+  width: 100%;
+  text-align: left;
+}
+
+.notes {
+  text-align: left;
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+}
+.date {
+  margin-top: 20px;
+  font-weight: 600;
+}

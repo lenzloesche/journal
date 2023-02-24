@@ -1,0 +1,6 @@
+@import url("../../colors.css");
+.Header {
+  margin-top: 10px;
+  background-color: var(--color-water-10);
+  padding: 4px;
+}

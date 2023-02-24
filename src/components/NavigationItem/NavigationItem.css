@@ -1,0 +1,24 @@
+@import url("../../colors.css");
+.listItem {
+  display: flex;
+
+  font-size: large;
+  font-weight: 600;
+}
+.text {
+  padding: 4px 8px;
+}
+.text--bolded {
+  color: var(--color-nemo);
+}
+.number {
+  width: 20px;
+  padding: 4px 8px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: var(--color-water-10);
+}
+.number--bolded {
+  background-color: var(--color-nemo);
+  color: var(--color-foam);
+}
