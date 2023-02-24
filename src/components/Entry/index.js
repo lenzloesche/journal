@@ -8,6 +8,7 @@ export default function Entry({
   date,
   bookmarked,
   onStarClick,
+  noDivider,
 }) {
   return (
     <article>
@@ -23,7 +24,7 @@ export default function Entry({
         />
       </div>
       <p className="notes">{children}</p>
-      <div className="line"></div>
+      {!noDivider ? <div className="line"></div> : ""}
     </article>
   );
 }

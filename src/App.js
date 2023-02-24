@@ -11,7 +11,6 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  //const [isFavorite, setIsFavorite] = useState([false, false, false]);
   const [allEntriesSelected, setAllEntriesSelected] = useState(true);
   const [entries, setEntries] = useState([
     {
@@ -97,7 +96,7 @@ function App() {
       </Navigation>
       <EntryContainer>
         {allEntriesSelected
-          ? entries.map((entry) => {
+          ? entries.map((entry, index) => {
               return (
                 <Entry
                   key={entry.key}
@@ -107,6 +106,7 @@ function App() {
                     handleStarClick(entry.key);
                   }}
                   bookmarked={entry.isFavorite ? true : false}
+                  noDivider={index === entries.length - 1 ? true : false}
                 >
                   {entry.innerText}
                 </Entry>
@@ -116,7 +116,7 @@ function App() {
               .filter((entry) => {
                 return entry.isFavorite;
               })
-              .map((entry) => {
+              .map((entry, index) => {
                 return (
                   <Entry
                     title={entry.title}
@@ -126,6 +126,7 @@ function App() {
                       handleStarClick(entry.key);
                     }}
                     bookmarked={true}
+                    noDivider={index === numberOfFavorites() - 1 ? true : false}
                   >
                     {entry.innerText}
                   </Entry>
