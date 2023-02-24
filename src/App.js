@@ -11,23 +11,29 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [isFavorite, setIsFavorite] = useState([false, false, false]);
+  //const [isFavorite, setIsFavorite] = useState([false, false, false]);
   const [allEntriesSelected, setAllEntriesSelected] = useState(true);
   const [entries, setEntries] = useState([
     {
       title: "Lorem1",
+      key: 5000,
+      isFavorite: false,
       date: "FEB 27, 2028",
       innerText:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
     },
     {
       title: "Lorem2",
+      key: 5001,
+      isFavorite: false,
       date: "FEB 4, 2028",
       innerText:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
     },
     {
       title: "Lorem3",
+      key: 5002,
+      isFavorite: false,
       date: "JAN 27, 2028",
       innerText:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
@@ -35,17 +41,25 @@ function App() {
   ]);
   const numberOfFavorites = () => {
     let trueCounter = 0;
-    for (let count = 0; count < isFavorite.length; count++) {
-      if (isFavorite[count]) {
+    for (let count = 0; count < entries.length; count++) {
+      if (entries[count].isFavorite) {
         trueCounter++;
       }
     }
     return trueCounter;
   };
-  function handleStarClick(number) {
-    const newIsFavorite = [...isFavorite];
-    newIsFavorite[number] = !newIsFavorite[number];
-    setIsFavorite(newIsFavorite);
+  function handleStarClick(key) {
+    let number = 0;
+
+    for (let i = 0; i < entries.length; i++) {
+      if (key === entries[i].key) {
+        number = i;
+      }
+    }
+
+    const newEntries = [...entries];
+    newEntries[number].isFavorite = !newEntries[number].isFavorite;
+    setEntries(newEntries);
   }
 
   function handleNavClick(number) {
@@ -69,7 +83,7 @@ function App() {
           onClick={() => {
             handleNavClick(0);
           }}
-          number={isFavorite.length}
+          number={entries.length}
           selected={allEntriesSelected ? true : false}
         />
         <NavigationItem
@@ -82,53 +96,41 @@ function App() {
         />
       </Navigation>
       <EntryContainer>
-        {allEntriesSelected ? (
-          <>
-            <Entry
-              title={entries[0].title}
-              date={entries[0].date}
-              onStarClick={() => {
-                handleStarClick(0);
-              }}
-              bookmarked={isFavorite[0] ? true : false}
-            >
-              {entries[0].innerText}
-            </Entry>
-            <Entry
-              title={entries[1].title}
-              date={entries[1].date}
-              onStarClick={() => {
-                handleStarClick(1);
-              }}
-              bookmarked={isFavorite[1] ? true : false}
-            >
-              {entries[1].innerText}
-            </Entry>{" "}
-            <Entry
-              title={entries[2].title}
-              date={entries[2].date}
-              onStarClick={() => {
-                handleStarClick(2);
-              }}
-              bookmarked={isFavorite[2] ? true : false}
-            >
-              {entries[2].innerText}
-            </Entry>
-          </>
-        ) : isFavorite[0] ? (
-          <>
-            <Entry
-              title={entries[0].title}
-              date={entries[0].date}
-              onStarClick={entries[0].onStarClick}
-              bookmarked={true}
-            >
-              {entries[0].innerText}
-            </Entry>
-          </>
-        ) : (
-          ""
-        )}
+        {allEntriesSelected
+          ? entries.map((entry) => {
+              return (
+                <Entry
+                  key={entry.key}
+                  title={entry.title}
+                  date={entry.date}
+                  onStarClick={() => {
+                    handleStarClick(entry.key);
+                  }}
+                  bookmarked={entry.isFavorite ? true : false}
+                >
+                  {entry.innerText}
+                </Entry>
+              );
+            })
+          : entries
+              .filter((entry) => {
+                return entry.isFavorite;
+              })
+              .map((entry) => {
+                return (
+                  <Entry
+                    title={entry.title}
+                    key={entry.key}
+                    date={entry.date}
+                    onStarClick={() => {
+                      handleStarClick(entry.key);
+                    }}
+                    bookmarked={true}
+                  >
+                    {entry.innerText}
+                  </Entry>
+                );
+              })}
       </EntryContainer>
       <Footer>Journal App -- 2028</Footer>
     </main>
