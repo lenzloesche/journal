@@ -1,9 +1,12 @@
 @import url("../../colors.css");
 .listItem {
   display: flex;
-
   font-size: large;
   font-weight: 600;
+}
+
+.listItem:hover {
+  cursor: pointer;
 }
 .text {
   padding: 4px 8px;
