@@ -71,14 +71,35 @@ function App() {
     }
   }
   function handleCreateClick() {
+    let newDate = new Date();
+    const monthNames = [
+      "Januar",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember",
+    ];
     const newEntry = {
       title: input.title,
-      key: entries[entries.length - 1].key + 1,
+      key: Math.random(),
       isFavorite: false,
-      date: "New Date()",
+      date:
+        "" +
+        monthNames[newDate.getMonth()] +
+        " " +
+        newDate.getDate() +
+        ", " +
+        newDate.getFullYear(),
       innerText: input.notes,
     };
-    setEntries([...entries, newEntry]);
+    setEntries([newEntry, ...entries]);
   }
 
   return (
