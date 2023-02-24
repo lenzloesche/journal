@@ -13,6 +13,26 @@ import { useState } from "react";
 function App() {
   const [isFavorite, setIsFavorite] = useState([false, false, false]);
   const [allEntriesSelected, setAllEntriesSelected] = useState(true);
+  const [entries, setEntries] = useState([
+    {
+      title: "Lorem1",
+      date: "FEB 27, 2028",
+      innerText:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
+    },
+    {
+      title: "Lorem2",
+      date: "FEB 4, 2028",
+      innerText:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
+    },
+    {
+      title: "Lorem3",
+      date: "JAN 27, 2028",
+      innerText:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
+    },
+  ]);
   const numberOfFavorites = () => {
     let trueCounter = 0;
     for (let count = 0; count < isFavorite.length; count++) {
@@ -65,43 +85,45 @@ function App() {
         {allEntriesSelected ? (
           <>
             <Entry
-              title="Lorem1"
-              date="FEB 27, 2028"
+              title={entries[0].title}
+              date={entries[0].date}
               onStarClick={() => {
                 handleStarClick(0);
               }}
               bookmarked={isFavorite[0] ? true : false}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-              consectetur totam unde quas. Nisi nemo, facere cumque dolores
-              optio temporibus magni placeat sed, libero nulla quae quam impedit
-              excepturi voluptas.
+              {entries[0].innerText}
             </Entry>
             <Entry
-              title="Lorem2"
-              date="JAN 8, 2028"
+              title={entries[1].title}
+              date={entries[1].date}
               onStarClick={() => {
                 handleStarClick(1);
               }}
               bookmarked={isFavorite[1] ? true : false}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-              consectetur totam unde quas. Nisi nemo, facere cumque dolores
-              optio temporibus magni placeat sed, libero nulla quae quam impedit
-              excepturi voluptas.
-            </Entry>
+              {entries[1].innerText}
+            </Entry>{" "}
             <Entry
-              title="Lorem Next"
-              date="FEB 5, 2028"
+              title={entries[2].title}
+              date={entries[2].date}
               onStarClick={() => {
                 handleStarClick(2);
               }}
               bookmarked={isFavorite[2] ? true : false}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-              consectetur totam unde quas. Nisi nemo, facere cumque dolores
-              optio temporibus magni placeat sed, libero nulla quae quam impedit
-              excepturi voluptas.
+              {entries[2].innerText}
+            </Entry>
+          </>
+        ) : isFavorite[0] ? (
+          <>
+            <Entry
+              title={entries[0].title}
+              date={entries[0].date}
+              onStarClick={entries[0].onStarClick}
+              bookmarked={true}
+            >
+              {entries[0].innerText}
             </Entry>
           </>
         ) : (
