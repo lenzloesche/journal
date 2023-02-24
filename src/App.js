@@ -39,6 +39,7 @@ function App() {
     },
   ]);
   const [input, setInput] = useState({ notes: "", title: "" });
+  const [eraseInput, setEraseInput] = useState(false);
 
   const numberOfFavorites = () => {
     let trueCounter = 0;
@@ -100,14 +101,29 @@ function App() {
       innerText: input.notes,
     };
     setEntries([newEntry, ...entries]);
+    setEraseInput(true);
   }
 
+  function putEraseInputFalse() {
+    setEraseInput(false);
+    setInput({ notes: "", title: "" });
+  }
   return (
     <main>
       <Header>JOURNAL</Header>
       <Title>New Entry</Title>
-      <Input title="Motto" input={input} />
-      <Input title="Notes" input={input} />
+      <Input
+        title="Motto"
+        input={input}
+        eraseInput={eraseInput}
+        putEraseInputFalse={() => putEraseInputFalse()}
+      />
+      <Input
+        title="Notes"
+        input={input}
+        eraseInput={eraseInput}
+        putEraseInputFalse={() => putEraseInputFalse()}
+      />
       <Button onClick={() => handleCreateClick()}>Create</Button>
       <Navigation>
         <NavigationItem
