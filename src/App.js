@@ -72,38 +72,40 @@ function App() {
     }
   }
   function handleCreateClick() {
-    let newDate = new Date();
-    const monthNames = [
-      "Januar",
-      "Februar",
-      "März",
-      "April",
-      "Mai",
-      "Juni",
-      "Juli",
-      "August",
-      "September",
-      "Oktober",
-      "November",
-      "Dezember",
-    ];
-    const newEntry = {
-      title: input.title,
-      key: Math.random(),
-      isFavorite: false,
-      date:
-        "" +
-        monthNames[newDate.getMonth()] +
-        " " +
-        newDate.getDate() +
-        ", " +
-        newDate.getFullYear(),
-      innerText: input.notes,
-    };
-    setEntries([newEntry, ...entries]);
-    setEraseInput(true);
+    if (input.notes === "" || input.title === "") {
+    } else {
+      let newDate = new Date();
+      const monthNames = [
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember",
+      ];
+      const newEntry = {
+        title: input.title,
+        key: Math.random(),
+        isFavorite: false,
+        date:
+          "" +
+          monthNames[newDate.getMonth()] +
+          " " +
+          newDate.getDate() +
+          ", " +
+          newDate.getFullYear(),
+        innerText: input.notes,
+      };
+      setEntries([newEntry, ...entries]);
+      setEraseInput(true);
+    }
   }
-
   function putEraseInputFalse() {
     setEraseInput(false);
     setInput({ notes: "", title: "" });
