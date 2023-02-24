@@ -68,6 +68,16 @@ function App() {
       setAllEntriesSelected(false);
     }
   }
+  function handleCreateClick(motto, notes) {
+    const newEntry = {
+      title: motto,
+      key: entries[entries.length - 1].key + 1,
+      isFavorite: false,
+      date: "New Date()",
+      innerText: notes,
+    };
+    setEntries([...entries, newEntry]);
+  }
 
   return (
     <main>
@@ -75,7 +85,9 @@ function App() {
       <Title>New Entry</Title>
       <Input title="Motto" />
       <Input title="Notes" />
-      <Button>Create</Button>
+      <Button onClick={() => handleCreateClick("new item", "text")}>
+        Create
+      </Button>
       <Navigation>
         <NavigationItem
           title="All Entries"
