@@ -123,3 +123,21 @@ test("create button should have css-class Button", async () => {
   const createButton = getCreateButton(screen);
   expect(createButton).toHaveClass("Button");
 });
+
+test("should have one header element that says journal", () => {
+  render(<App />);
+  const header = screen.getAllByRole("banner");
+  expect(header[0]).toBeInTheDocument();
+  expect(header.length).toBe(1);
+  const test = header[0].innerHTML.includes("JOURNAL");
+  expect(test).toBe(true);
+});
+
+test("should have one footer element that says journal app", () => {
+  render(<App />);
+  const footer = screen.getAllByRole("contentinfo");
+  expect(footer[0]).toBeInTheDocument();
+  expect(footer.length).toBe(1);
+  const test = footer[0].innerHTML.includes("Journal App");
+  expect(test).toBe(true);
+});
