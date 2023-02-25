@@ -1,19 +1,17 @@
 import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import App from "./App";
+import React from "react";
 
 test("CreateButton exists", () => {
   render(<App />);
-  const buttons = screen.getAllByRole(/button/i);
-  const createButton = buttons.filter((button) =>
-    button.textContent.includes("Create")
-  );
-  expect(createButton[0]).toBeInTheDocument();
+  const createButton = getCreateButton(screen);
+  expect(createButton).toBeInTheDocument();
 });
 
 test("button click should create a new entry (if text in both input fields) with the given text", () => {
   render(<App />);
-  const createButton = screen.getByRole(/button/i);
+  const createButton = getCreateButton(screen);
   const entriesOld = screen.getAllByRole("article");
   const textboxes = screen.getAllByRole("textbox");
   textboxes.forEach((textbox, index) => {
@@ -30,7 +28,7 @@ test("button click should create a new entry (if text in both input fields) with
 
 test("button click should not create a new entry if one of input fields is empty", () => {
   render(<App />);
-  const createButton = screen.getByRole(/button/i);
+  const createButton = getCreateButton(screen);
   const entriesOld = screen.getAllByRole("article");
   const textboxes = screen.getAllByRole("textbox");
   textboxes.forEach((textbox, index) => {
@@ -47,7 +45,7 @@ test("button click should not create a new entry if one of input fields is empty
   expect(entriesNew.length).toBe(entriesOld.length);
 });
 
-test("inputfields", () => {
+test("inputfields exist", () => {
   render(<App />);
   const motto = screen.getByLabelText(/motto/i);
   expect(motto).toBeInTheDocument();
@@ -61,13 +59,40 @@ test("inputfields", () => {
   expect(textboxes.length).toBe(2);
 });
 
-/* test("just a test", () => {
-  render(<App />);
-
-  const entries = screen.getAllByRole("article");
-  const entriesFiltered = entries.filter((entry) =>
-    entry.textContent.includes("Lorem1")
+function getCreateButton(screen) {
+  const buttons = screen.getAllByRole(/button/i);
+  const createButtonArray = buttons.filter((button) =>
+    button.textContent.includes("Create")
   );
-  console.log(entriesFiltered);
+  return createButtonArray[0];
+}
+
+function getFavoritesButton(screen) {
+  const listItems = screen.getAllByRole(/listitem/i);
+  const listItemsArray = listItems.filter((listItem) =>
+    listItem.textContent.includes("Favorites")
+  );
+  return listItemsArray[0];
+}
+
+test("if you create a new entry, you can favorite and display it.", () => {
+  render(<App />);
+  const createButton = getCreateButton(screen);
+
+  const textboxes = screen.getAllByRole("textbox");
+  textboxes.forEach((textbox) => {
+    fireEvent.change(textbox, {
+      target: { value: "testtext" },
+    });
+  });
+  fireEvent.click(createButton);
+  const testInputText = screen.getAllByText(/testtext/i);
+  const theRightStar = testInputText[0].parentElement.querySelector("img");
+  expect(theRightStar.src).toContain("star.svg");
+  fireEvent.click(theRightStar);
+  expect(theRightStar.src).toContain("star-filled.svg");
+  const favButton = getFavoritesButton(screen);
+  fireEvent.click(favButton);
+  const testInputTextonFavoritePage = screen.getAllByText(/testtext/i);
+  expect(testInputTextonFavoritePage[0]).toBeInTheDocument();
 });
- */
