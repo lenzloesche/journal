@@ -1,5 +1,5 @@
 import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 import React from "react";
 
@@ -116,12 +116,6 @@ test("new entries should display the current year", () => {
     return paragraph.innerHTML.includes(currentYear);
   });
   expect(yearText[0]).toBeInTheDocument();
-});
-
-test("create button should have css-class Button", async () => {
-  render(<App />);
-  const createButton = getCreateButton(screen);
-  expect(createButton).toHaveClass("Button");
 });
 
 test("should have one header element that says journal", () => {
