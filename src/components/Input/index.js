@@ -25,7 +25,7 @@ export default function Input({
   return (
     <>
       <div className="lable-container">
-        <label htmlFor={title} className="label">
+        <label htmlFor={title} className="label" data-testid="label">
           {title}
         </label>
       </div>
