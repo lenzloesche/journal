@@ -1,5 +1,5 @@
 import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 import React from "react";
 
@@ -95,4 +95,25 @@ test("if you create a new entry, you can favorite and display it.", () => {
   fireEvent.click(favButton);
   const testInputTextonFavoritePage = screen.getAllByText(/testtext/i);
   expect(testInputTextonFavoritePage[0]).toBeInTheDocument();
+});
+
+test("new entries should display the current year", () => {
+  render(<App />);
+  const createButton = getCreateButton(screen);
+
+  const textboxes = screen.getAllByRole("textbox");
+  textboxes.forEach((textbox) => {
+    fireEvent.change(textbox, {
+      target: { value: "testtext" },
+    });
+  });
+  fireEvent.click(createButton);
+
+  const currenDate = new Date();
+  const currentYear = currenDate.getFullYear();
+  const dateParagraphs = screen.getAllByTestId("date");
+  const yearText = dateParagraphs.filter((paragraph) => {
+    return paragraph.innerHTML.includes(currentYear);
+  });
+  expect(yearText[0]).toBeInTheDocument();
 });
