@@ -97,6 +97,21 @@ test("if you create a new entry, you can favorite and display it.", () => {
   expect(testInputTextonFavoritePage[0]).toBeInTheDocument();
 });
 
+test("if you create a new entry, the input fields are emptied.", () => {
+  render(<App />);
+  const createButton = getCreateButton(screen);
+
+  const textboxes = screen.getAllByRole("textbox");
+  textboxes.forEach((textbox) => {
+    fireEvent.change(textbox, {
+      target: { value: "testtext" },
+    });
+  });
+  fireEvent.click(createButton);
+  expect(textboxes[0].value).toBe("");
+  expect(textboxes[1].value).toBe("");
+});
+
 test("new entries should display the current year", () => {
   render(<App />);
   const createButton = getCreateButton(screen);
