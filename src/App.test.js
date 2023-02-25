@@ -1,13 +1,14 @@
 import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import App from "./App";
 
-test("CreateButton", () => {
+test("CreateButton exists", () => {
   render(<App />);
-  const createButton = screen.getByRole(/button/i);
-  expect(createButton).toBeInTheDocument();
-  const createButtoninnerHTML = createButton.innerHTML;
-  expect(createButtoninnerHTML).toContain("Create");
+  const buttons = screen.getAllByRole(/button/i);
+  const createButton = buttons.filter((button) =>
+    button.textContent.includes("Create")
+  );
+  expect(createButton[0]).toBeInTheDocument();
 });
 
 test("button click should create a new entry (if text in both input fields) with the given text", () => {
@@ -59,3 +60,14 @@ test("inputfields", () => {
   });
   expect(textboxes.length).toBe(2);
 });
+
+/* test("just a test", () => {
+  render(<App />);
+
+  const entries = screen.getAllByRole("article");
+  const entriesFiltered = entries.filter((entry) =>
+    entry.textContent.includes("Lorem1")
+  );
+  console.log(entriesFiltered);
+});
+ */
