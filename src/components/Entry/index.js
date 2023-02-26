@@ -25,7 +25,9 @@ export default function Entry({
           }}
         />
       </div>
-      <p className="notes">{children}</p>
+      <p data-testid="entyText" className="notes">
+        {children}
+      </p>
       {!noDivider ? <div className="line"></div> : ""}
     </article>
   );
