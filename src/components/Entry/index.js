@@ -12,7 +12,9 @@ export default function Entry({
 }) {
   return (
     <article>
-      <p className="date">{date}</p>
+      <p data-testid="date" className="date">
+        {date}
+      </p>
       <div className="flexbox">
         <h3 className="motto">{title}</h3>
         <img
@@ -23,7 +25,9 @@ export default function Entry({
           }}
         />
       </div>
-      <p className="notes">{children}</p>
+      <p data-testid="entyText" className="notes">
+        {children}
+      </p>
       {!noDivider ? <div className="line"></div> : ""}
     </article>
   );
