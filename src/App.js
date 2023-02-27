@@ -9,6 +9,7 @@ import NavigationItem from "./components/NavigationItem";
 import Title from "./components/Title";
 import "./App.css";
 import { useState } from "react";
+import { uid } from "uid";
 
 function App() {
   const [allEntriesSelected, setAllEntriesSelected] = useState(true);
@@ -39,7 +40,14 @@ function App() {
     },
   ]);
   const [input, setInput] = useState({ notes: "", title: "" });
-  const [eraseInput, setEraseInput] = useState(false);
+
+  function updateInput() {
+    setInput({ notes: input.notes, title: input.title });
+  }
+
+  function eraseInput() {
+    setInput({ notes: "", title: "" });
+  }
 
   const numberOfFavorites = () => {
     let trueCounter = 0;
@@ -50,18 +58,13 @@ function App() {
     }
     return trueCounter;
   };
+
   function handleStarClick(key) {
-    let number = 0;
-
-    for (let i = 0; i < entries.length; i++) {
-      if (key === entries[i].key) {
-        number = i;
-      }
-    }
-
-    const newEntries = [...entries];
-    newEntries[number].isFavorite = !newEntries[number].isFavorite;
-    setEntries(newEntries);
+    setEntries(
+      entries.map((entry) =>
+        entry.key === key ? { ...entry, isFavorite: !entry.isFavorite } : entry
+      )
+    );
   }
 
   function handleNavClick(number) {
@@ -71,6 +74,7 @@ function App() {
       setAllEntriesSelected(false);
     }
   }
+
   function handleCreateClick() {
     if (input.notes === "" || input.title === "") {
     } else {
@@ -91,7 +95,7 @@ function App() {
       ];
       const newEntry = {
         title: input.title,
-        key: Math.random(),
+        key: uid(),
         isFavorite: false,
         date:
           "" +
@@ -103,29 +107,16 @@ function App() {
         innerText: input.notes,
       };
       setEntries([newEntry, ...entries]);
-      setEraseInput(true);
+      eraseInput();
     }
   }
-  function putEraseInputFalse() {
-    setEraseInput(false);
-    setInput({ notes: "", title: "" });
-  }
+
   return (
     <main>
       <Header>JOURNAL</Header>
       <Title>New Entry</Title>
-      <Input
-        title="Motto"
-        input={input}
-        eraseInput={eraseInput}
-        putEraseInputFalse={() => putEraseInputFalse()}
-      />
-      <Input
-        title="Notes"
-        input={input}
-        eraseInput={eraseInput}
-        putEraseInputFalse={() => putEraseInputFalse()}
-      />
+      <Input title="Motto" input={input} updateInput={updateInput} />
+      <Input title="Notes" input={input} updateInput={updateInput} />
       <Button onClick={() => handleCreateClick()}>Create</Button>
       <Navigation>
         <NavigationItem
