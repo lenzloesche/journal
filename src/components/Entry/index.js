@@ -1,6 +1,7 @@
 import star from "../../resources/star.svg";
 import starFilled from "../../resources/star-filled.svg";
 import "./Entry.css";
+import Button from "../Button";
 
 export default function Entry({
   children,
@@ -29,7 +30,9 @@ export default function Entry({
       <p data-testid="entyText" className="notes">
         {children}
       </p>
-      <button onClick={(id) => handleDelete(id)}>Delete</button>
+      <Button onClick={(id) => handleDelete(id)} small={true}>
+        Delete
+      </Button>
       {!noDivider ? <div className="line"></div> : ""}
     </article>
   );
