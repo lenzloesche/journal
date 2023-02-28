@@ -40,6 +40,10 @@ function App() {
     },
   ]);
   const [input, setInput] = useState({ notes: "", title: "" });
+  const [buttonOutput, setButtonOutput] = useState({
+    text: "-",
+    isAlert: false,
+  });
 
   function updateInput() {
     setInput({ notes: input.notes, title: input.title });
@@ -71,7 +75,9 @@ function App() {
 
   function handleCreateClick() {
     if (input.notes === "" || input.title === "") {
+      setButtonOutput({ text: "Fields should not be empty.", isAlert: true });
     } else {
+      setButtonOutput({ text: "New Entry created", isAlert: false });
       let newDate = new Date();
       const monthNames = [
         "Januar",
@@ -111,7 +117,9 @@ function App() {
       <Title>New Entry</Title>
       <Input title="Motto" input={input} updateInput={updateInput} />
       <Input title="Notes" input={input} updateInput={updateInput} />
-      <Button onClick={() => handleCreateClick()}>Create</Button>
+      <Button buttonOutput={buttonOutput} onClick={() => handleCreateClick()}>
+        Create
+      </Button>
       <Navigation>
         <NavigationItem
           title="All Entries"

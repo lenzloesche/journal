@@ -12,3 +12,11 @@
 .Button:hover {
   cursor: pointer;
 }
+.Button-output {
+  padding: 0;
+  margin: 0;
+}
+
+.Button-output--alert {
+  color: red;
+}
