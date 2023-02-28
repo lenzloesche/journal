@@ -9,6 +9,7 @@ export default function Entry({
   bookmarked,
   onStarClick,
   noDivider,
+  handleDelete,
 }) {
   return (
     <article>
@@ -28,6 +29,7 @@ export default function Entry({
       <p data-testid="entyText" className="notes">
         {children}
       </p>
+      <button onClick={(id) => handleDelete(id)}>Delete</button>
       {!noDivider ? <div className="line"></div> : ""}
     </article>
   );

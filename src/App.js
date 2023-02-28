@@ -18,6 +18,7 @@ function App() {
     defaultValue: [
       {
         title: "Lorem1",
+        id: 5000,
         key: 5000,
         isFavorite: false,
         date: "FEB 27, 2028",
@@ -26,6 +27,7 @@ function App() {
       },
       {
         title: "Lorem2",
+        id: 5001,
         key: 5001,
         isFavorite: false,
         date: "FEB 4, 2028",
@@ -34,6 +36,7 @@ function App() {
       },
       {
         title: "Lorem3",
+        id: 5002,
         key: 5002,
         isFavorite: false,
         date: "JAN 27, 2028",
@@ -96,9 +99,11 @@ function App() {
         "November",
         "Dezember",
       ];
+      const newId = uid();
       const newEntry = {
         title: input.title,
-        key: uid(),
+        key: newId,
+        id: newId,
         isFavorite: false,
         date:
           "" +
@@ -112,6 +117,10 @@ function App() {
       setEntries([newEntry, ...entries]);
       eraseInput();
     }
+  }
+
+  function handleDelete(idd) {
+    setEntries(entries.filter((entry) => entry.id !== idd));
   }
 
   return (
@@ -146,6 +155,7 @@ function App() {
           ? entries.map((entry, index) => {
               return (
                 <Entry
+                  handleDelete={() => handleDelete(entry.id)}
                   key={entry.key}
                   title={entry.title}
                   date={entry.date}
@@ -166,6 +176,7 @@ function App() {
               .map((entry, index) => {
                 return (
                   <Entry
+                    handleDelete={() => handleDelete(entry.id)}
                     title={entry.title}
                     key={entry.key}
                     date={entry.date}
