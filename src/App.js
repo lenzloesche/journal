@@ -50,13 +50,7 @@ function App() {
   }
 
   const numberOfFavorites = () => {
-    let trueCounter = 0;
-    for (let count = 0; count < entries.length; count++) {
-      if (entries[count].isFavorite) {
-        trueCounter++;
-      }
-    }
-    return trueCounter;
+    return entries.filter((entry) => entry.isFavorite).length;
   };
 
   function handleStarClick(key) {
