@@ -10,35 +10,38 @@ import Title from "./components/Title";
 import "./App.css";
 import { useState } from "react";
 import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
   const [allEntriesSelected, setAllEntriesSelected] = useState(true);
-  const [entries, setEntries] = useState([
-    {
-      title: "Lorem1",
-      key: 5000,
-      isFavorite: false,
-      date: "FEB 27, 2028",
-      innerText:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
-    },
-    {
-      title: "Lorem2",
-      key: 5001,
-      isFavorite: false,
-      date: "FEB 4, 2028",
-      innerText:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
-    },
-    {
-      title: "Lorem3",
-      key: 5002,
-      isFavorite: false,
-      date: "JAN 27, 2028",
-      innerText:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
-    },
-  ]);
+  const [entries, setEntries] = useLocalStorageState("entries", {
+    defaultValue: [
+      {
+        title: "Lorem1",
+        key: 5000,
+        isFavorite: false,
+        date: "FEB 27, 2028",
+        innerText:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
+      },
+      {
+        title: "Lorem2",
+        key: 5001,
+        isFavorite: false,
+        date: "FEB 4, 2028",
+        innerText:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
+      },
+      {
+        title: "Lorem3",
+        key: 5002,
+        isFavorite: false,
+        date: "JAN 27, 2028",
+        innerText:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat      consectetur totam unde quas. Nisi nemo, facere cumque dolores      optio temporibus magni placeat sed, libero nulla quae quam impedit      excepturi voluptas.",
+      },
+    ],
+  });
   const [input, setInput] = useState({ notes: "", title: "" });
   const [buttonOutput, setButtonOutput] = useState({
     text: "-",
